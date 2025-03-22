@@ -1,9 +1,7 @@
 package com.monolithic.cinema.entity;
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Data;
+import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import java.time.Instant;
@@ -12,6 +10,8 @@ import java.time.Instant;
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "bookings")
 public class Booking {
 

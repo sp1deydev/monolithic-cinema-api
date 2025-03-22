@@ -1,15 +1,15 @@
 package com.monolithic.cinema.entity;
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Data;
+import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 @Data
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "tickets")
 public class Ticket {
 
