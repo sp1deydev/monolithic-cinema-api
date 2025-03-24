@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,17 +20,17 @@ import java.util.List;
 public class MovieController {
     MovieService movieService;
     private static final String DEFAULT_MOVIES_PAGE_SIZE = "12";
-
+    @Transactional
     @GetMapping
     public List<MovieResponse> getMovies() {
         return movieService.getMovies();
     }
-
+    @Transactional
     @GetMapping("/{id}")
     public MovieResponse getMovie(@PathVariable String id) {
         return movieService.getMovie(id);
     }
-
+    @Transactional
     @RequestMapping(method = RequestMethod.HEAD)
     public ResponseEntity countMovies(@RequestParam(defaultValue = DEFAULT_MOVIES_PAGE_SIZE) int size) {
         int totalMovies = movieService.countMovies();
@@ -41,17 +42,17 @@ public class MovieController {
 
         return ResponseEntity.ok().headers(headers).build();
     }
-
+    @Transactional
     @PostMapping
     public MovieResponse createMovie(@RequestBody MovieRequest request) {
         return movieService.createMovie(request);
     }
-
+    @Transactional
     @PutMapping("/{id}")
     public MovieResponse updateMovie(@PathVariable String id, @RequestBody MovieRequest request) {
         return movieService.updateMovie(id, request);
     }
-
+    @Transactional
     @DeleteMapping("/{id}")
     public void deleteMovie(@PathVariable String id) {
         movieService.deleteMovie(id);

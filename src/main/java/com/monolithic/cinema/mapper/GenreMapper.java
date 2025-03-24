@@ -17,5 +17,6 @@ public interface GenreMapper {
     GenreDetailResponse toGenreDetailResponse(Genre genre);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+    //To ignore null field when mapping
     void updateGenre(@MappingTarget Genre genre, GenreRequest request);
 }

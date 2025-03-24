@@ -16,8 +16,8 @@ public interface MovieMapper {
 
     Movie toMovie(MovieRequest request);
 
-//    List<MovieResponse> toMovieResponses(List<Movie> movie);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+    //To ignore null field when mapping
     void updateMovie(@MappingTarget Movie movie, MovieRequest request);
 }

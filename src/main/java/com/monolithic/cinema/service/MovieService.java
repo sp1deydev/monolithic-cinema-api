@@ -3,6 +3,8 @@ package com.monolithic.cinema.service;
 import com.monolithic.cinema.dto.Request.MovieRequest;
 import com.monolithic.cinema.dto.Response.MovieResponse;
 import com.monolithic.cinema.entity.Movie;
+import com.monolithic.cinema.enums.ErrorCode;
+import com.monolithic.cinema.exception.CustomException;
 import com.monolithic.cinema.mapper.MovieMapper;
 import com.monolithic.cinema.repository.MovieRepository;
 import lombok.AccessLevel;
@@ -25,7 +27,7 @@ public class MovieService {
 
     public MovieResponse getMovie(String id) {
         return movieMapper.toMovieResponse(movieRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Movie Not Found")));
+                .orElseThrow(() -> new CustomException(ErrorCode.RESOURCE_NOT_FOUND, "Movie")));
     }
 
     public int countMovies() {
@@ -33,12 +35,16 @@ public class MovieService {
     }
 
     public MovieResponse createMovie(MovieRequest request) {
+        if(movieRepository.existsByTitle(request.getTitle())) {
+            throw new CustomException(ErrorCode.RESOURCE_ALREADY_EXISTS, "Movie");
+        }
         Movie movie = movieMapper.toMovie(request);
         return movieMapper.toMovieResponse(movieRepository.save(movie));
     }
 
     public MovieResponse updateMovie(String id, MovieRequest request) {
-        Movie movie = movieRepository.findById(id).orElseThrow(() -> new RuntimeException("Movie Not Found"));
+        Movie movie = movieRepository.findById(id)
+                .orElseThrow(() -> new CustomException(ErrorCode.RESOURCE_NOT_FOUND, "Movie"));
         movieMapper.updateMovie(movie, request);
         return movieMapper.toMovieResponse(movieRepository.save(movie));
     }

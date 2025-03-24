@@ -4,14 +4,14 @@ import com.monolithic.cinema.dto.Request.GenreRequest;
 import com.monolithic.cinema.dto.Response.GenreDetailResponse;
 import com.monolithic.cinema.dto.Response.GenreResponse;
 import com.monolithic.cinema.entity.Genre;
+import com.monolithic.cinema.enums.ErrorCode;
+import com.monolithic.cinema.exception.CustomException;
 import com.monolithic.cinema.mapper.GenreMapper;
 import com.monolithic.cinema.repository.GenreRepository;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 import java.util.List;
 
 @Service
@@ -28,7 +28,7 @@ public class GenreService {
 
     public GenreDetailResponse getGenre(String id) {
         return genreMapper.toGenreDetailResponse(genreRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Genre Not Found!")));
+                .orElseThrow(() -> new CustomException(ErrorCode.RESOURCE_NOT_FOUND, "Genre")));
 
     }
 
@@ -37,11 +37,15 @@ public class GenreService {
     }
 
     public GenreResponse createGenre(GenreRequest request) {
+        if(genreRepository.existsByName(request.getName())) {
+            throw new CustomException(ErrorCode.RESOURCE_ALREADY_EXISTS, "Genre");
+        }
         return genreMapper.toGenreResponse(genreRepository.save(genreMapper.toGenre(request)));
     }
 
     public GenreResponse updateGenre(String id, GenreRequest request) {
-        Genre genre = genreRepository.findById(id).orElseThrow(() -> new RuntimeException("Genre Not Found!"));
+        Genre genre = genreRepository.findById(id)
+                .orElseThrow(() -> new CustomException(ErrorCode.RESOURCE_NOT_FOUND, "Genre"));
         genreMapper.updateGenre(genre, request);
         return genreMapper.toGenreResponse(genreRepository.save(genre));
     }
