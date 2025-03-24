@@ -1,8 +1,11 @@
 package com.monolithic.cinema.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+
+import java.util.List;
 
 @Data
 @Builder
@@ -19,6 +22,9 @@ public class Genre {
 
     @Column(name = "name")
     String name;
+
+    @OneToMany(mappedBy = "genre", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Movie> movies;
 
 }
 

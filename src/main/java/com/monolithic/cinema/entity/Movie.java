@@ -31,8 +31,12 @@ public class Movie {
     @Column(name = "duration")
     Integer duration;
 
-    @Column(name = "genre_id")
-    String genreId;
+//    @Column(name = "genre_id")
+//    String genreId;
+
+    @ManyToOne
+    @JoinColumn(name = "genre_id", nullable = false)
+    private Genre genre;
 
 }
 
