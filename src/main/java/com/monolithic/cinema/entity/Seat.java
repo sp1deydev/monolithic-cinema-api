@@ -25,7 +25,7 @@ public class Seat {
     @Column(name = "number")
     Integer number;
 
-    @Column(name = "room_id")
-    String roomId;
-
+    @ManyToOne
+    @JoinColumn(name = "room_id", nullable = false)
+    Room room;
 }

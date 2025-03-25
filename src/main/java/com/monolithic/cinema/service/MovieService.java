@@ -56,6 +56,8 @@ public class MovieService {
     }
 
     public void deleteMovie(String id) {
+        movieRepository.findById(id)
+                .orElseThrow(() -> new CustomException(ErrorCode.RESOURCE_NOT_FOUND, "Movie"));
         movieRepository.deleteById(id);
     }
 }
