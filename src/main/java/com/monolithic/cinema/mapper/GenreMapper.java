@@ -1,7 +1,6 @@
 package com.monolithic.cinema.mapper;
 
 import com.monolithic.cinema.dto.Request.GenreRequest;
-import com.monolithic.cinema.dto.Response.GenreDetailResponse;
 import com.monolithic.cinema.dto.Response.GenreResponse;
 import com.monolithic.cinema.entity.Genre;
 import org.mapstruct.*;
@@ -14,7 +13,6 @@ public interface GenreMapper {
 
     GenreResponse toGenreResponse(Genre genre);
 
-    GenreDetailResponse toGenreDetailResponse(Genre genre);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     //To ignore null field when mapping

@@ -1,7 +1,6 @@
 package com.monolithic.cinema.controller;
 
 import com.monolithic.cinema.dto.Request.GenreRequest;
-import com.monolithic.cinema.dto.Response.GenreDetailResponse;
 import com.monolithic.cinema.dto.Response.GenreResponse;
 import com.monolithic.cinema.service.GenreService;
 import lombok.AccessLevel;
@@ -37,7 +36,7 @@ public class GenreController {
     }
     @Transactional
     @GetMapping("/{id}")
-    public GenreDetailResponse getGenre(@PathVariable String id) {
+    public GenreResponse getGenre(@PathVariable String id) {
         return genreService.getGenre(id);
     }
     @Transactional

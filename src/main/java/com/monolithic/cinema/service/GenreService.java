@@ -1,7 +1,6 @@
 package com.monolithic.cinema.service;
 
 import com.monolithic.cinema.dto.Request.GenreRequest;
-import com.monolithic.cinema.dto.Response.GenreDetailResponse;
 import com.monolithic.cinema.dto.Response.GenreResponse;
 import com.monolithic.cinema.entity.Genre;
 import com.monolithic.cinema.enums.ErrorCode;
@@ -26,8 +25,8 @@ public class GenreService {
                 .stream().map(genreMapper::toGenreResponse).toList();
     }
 
-    public GenreDetailResponse getGenre(String id) {
-        return genreMapper.toGenreDetailResponse(genreRepository.findById(id)
+    public GenreResponse getGenre(String id) {
+        return genreMapper.toGenreResponse(genreRepository.findById(id)
                 .orElseThrow(() -> new CustomException(ErrorCode.RESOURCE_NOT_FOUND, "Genre")));
 
     }
