@@ -20,8 +20,9 @@ import java.util.List;
 public class MovieController {
     MovieService movieService;
     private static final String DEFAULT_MOVIES_PAGE_SIZE = "12";
-    @Transactional
 
+
+    @GetMapping
     public List<MovieResponse> getMovies() {
         return movieService.getMovies();
     }
