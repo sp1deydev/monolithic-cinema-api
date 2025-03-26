@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
+import java.util.List;
+
 @Data
 @Builder
 @AllArgsConstructor
@@ -20,7 +22,11 @@ public class Room {
     @Column(name = "name")
     String name;
 
-    @Column(name = "cinema_id")
-    String cinemaId;
+    @ManyToOne
+    @JoinColumn(name = "cinema_id", nullable = false)
+    private Cinema cinema;
+
+    @OneToMany(mappedBy = "room", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    List<Seat> seats;
 
 }

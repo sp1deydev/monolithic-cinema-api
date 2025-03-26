@@ -23,7 +23,7 @@ public class Genre {
     @Column(name = "name")
     String name;
 
-    @OneToMany(mappedBy = "genre", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "genre", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<Movie> movies;
 
 }
