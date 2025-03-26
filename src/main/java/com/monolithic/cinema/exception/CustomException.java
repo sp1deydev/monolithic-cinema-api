@@ -9,12 +9,17 @@ import com.monolithic.cinema.enums.ErrorCode;
 @Setter
 public class CustomException extends RuntimeException {
     private ErrorCode errorCode;
-    private final String resourceName;
+    private String resourceName;
 
     public CustomException(ErrorCode errorCode, String resourceName) {
         super(errorCode.getMessage());
         this.errorCode = errorCode;
         this.resourceName = resourceName;
+    }
+
+    public CustomException(ErrorCode errorCode){
+        super(errorCode.getMessage());
+        this.errorCode = errorCode;
     }
 
     public String getMessage() {

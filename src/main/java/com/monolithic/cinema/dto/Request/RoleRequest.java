@@ -1,4 +1,4 @@
-package com.monolithic.cinema.dto.Response;
+package com.monolithic.cinema.dto.Request;
 
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -8,10 +8,6 @@ import lombok.experimental.FieldDefaults;
 @Data
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Builder
-public class GenreResponse {
-
-    String id;
+public class RoleRequest {
     String name;
-
 }
-

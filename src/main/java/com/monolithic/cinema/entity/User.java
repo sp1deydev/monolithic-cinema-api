@@ -17,16 +17,17 @@ public class User {
     @GeneratedValue(strategy = GenerationType.UUID)
     String id;
 
-    @Column(name = "username")
+    @Column(name = "username", length = 50, nullable = false, unique = true)
     String username;
 
-    @Column(name = "email")
+    @Column(name = "email", length = 100, nullable = false, unique = true)
     String email;
 
     @Column(name = "password")
     String password;
 
-    @Column(name = "role_id")
-    String roleId;
+    @ManyToOne
+    @JoinColumn(name = "role_id", nullable = false)
+    Role role;
 
 }

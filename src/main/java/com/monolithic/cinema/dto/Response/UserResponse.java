@@ -8,10 +8,12 @@ import lombok.experimental.FieldDefaults;
 @Data
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Builder
-public class GenreResponse {
+public class UserResponse {
 
     String id;
-    String name;
+    String username;
+    String password;
+    String email;
+    String roleName;
 
 }
-
