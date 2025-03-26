@@ -19,6 +19,7 @@ import java.util.List;
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class MovieService {
     MovieRepository movieRepository;
+
     MovieMapper movieMapper;
 
     public List<MovieResponse> getMovies() {
