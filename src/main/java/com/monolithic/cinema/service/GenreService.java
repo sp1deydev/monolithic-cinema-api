@@ -11,11 +11,14 @@ import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
+@Transactional
 public class GenreService {
     GenreRepository genreRepository;
     GenreMapper genreMapper;
@@ -50,6 +53,8 @@ public class GenreService {
     }
 
     public void deleteGenre(String id) {
+        genreRepository.findById(id)
+                .orElseThrow(() -> new CustomException(ErrorCode.RESOURCE_NOT_FOUND, "Genre"));
         genreRepository.deleteById(id);
     }
 

@@ -1,9 +1,7 @@
 package com.monolithic.cinema.mapper;
 
-import com.monolithic.cinema.dto.Request.GenreRequest;
 import com.monolithic.cinema.dto.Request.MovieRequest;
 import com.monolithic.cinema.dto.Response.MovieResponse;
-import com.monolithic.cinema.entity.Genre;
 import com.monolithic.cinema.entity.Movie;
 import org.mapstruct.*;
 
