@@ -72,4 +72,13 @@ public class RoomService {
         roomMapper.updateRoom(room, request);
         return roomMapper.toRoomResponse(roomRepository.save(room));
     }
+
+    public void deleteRoom(String id) {
+        log.info("Fetching room with ID: {}", id);
+        roomRepository.findById(id)
+                .orElseThrow(() -> new CustomException(ErrorCode.RESOURCE_NOT_FOUND, "Room"));
+
+        roomRepository.deleteSeatsByRoomId(id);
+        roomRepository.deleteRoomById(id);
+    }
 }
