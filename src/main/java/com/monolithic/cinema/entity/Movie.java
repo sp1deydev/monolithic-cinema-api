@@ -42,5 +42,8 @@ public class Movie {
     @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL, orphanRemoval = true)
     List<Review> reviews;
 
+    @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL)
+    List<Showtime> showtimes;
+
 }
 

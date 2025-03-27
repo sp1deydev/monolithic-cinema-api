@@ -6,11 +6,13 @@ import com.monolithic.cinema.entity.Movie;
 import com.monolithic.cinema.enums.ErrorCode;
 import com.monolithic.cinema.exception.CustomException;
 import com.monolithic.cinema.mapper.MovieMapper;
+import com.monolithic.cinema.repository.GenreRepository;
 import com.monolithic.cinema.repository.MovieRepository;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -19,6 +21,7 @@ import java.util.List;
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class MovieService {
     MovieRepository movieRepository;
+    GenreRepository genreRepository;
 
     MovieMapper movieMapper;
 
@@ -35,11 +38,15 @@ public class MovieService {
         return (int) movieRepository.count();
     }
 
+    @Transactional()
     public MovieResponse createMovie(MovieRequest request) {
         if(movieRepository.existsByTitle(request.getTitle())) {
             throw new CustomException(ErrorCode.RESOURCE_ALREADY_EXISTS, "Movie");
         }
+        var genres = genreRepository.findById(request.getGenreId())
+                .orElseThrow(()-> new CustomException(ErrorCode.RESOURCE_NOT_FOUND,"Genre"));
         Movie movie = movieMapper.toMovie(request);
+        movie.setGenre(genres);
         return movieMapper.toMovieResponse(movieRepository.save(movie));
     }
 

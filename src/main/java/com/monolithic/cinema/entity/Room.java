@@ -29,4 +29,7 @@ public class Room {
     @OneToMany(mappedBy = "room", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     List<Seat> seats;
 
+    @OneToMany(mappedBy = "room", cascade = CascadeType.ALL)
+    List<Showtime> showtimes;
+
 }

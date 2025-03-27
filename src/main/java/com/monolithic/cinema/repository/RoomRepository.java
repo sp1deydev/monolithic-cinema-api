@@ -16,4 +16,6 @@ public interface RoomRepository extends JpaRepository<Room, String> {
     @Modifying
     @Query("DELETE FROM Room r WHERE r.id = :roomId")
     void deleteRoomById(@Param("roomId") String roomId);
+
+
 }

@@ -19,13 +19,14 @@ public class Showtime {
     @GeneratedValue(strategy = GenerationType.UUID)
     String id;
 
-    @Column(name = "movie_id")
-    String movieId;
-
-    @Column(name = "room_id")
-    String roomId;
-
     @Column(name = "showtime")
     Instant showtime;
 
+    @ManyToOne
+    @JoinColumn(name = "movie_id", nullable = false)
+    Movie movie;
+
+    @ManyToOne
+    @JoinColumn(name = "room_id", nullable = false)
+    Room room;
 }
