@@ -26,12 +26,6 @@ public class ReviewController {
         return reviewService.createReview(request);
     }
 
-//    @PostMapping("/{movieId}")
-//    public ResponseEntity<ReviewResponse> addReview(@PathVariable String movieId, @RequestBody ReviewRequest request) {
-//        request.setMovieId(movieId);  // Đảm bảo request chứa đúng movieId
-//        return ResponseEntity.ok(reviewService.addReview(request));
-//    }
-
     @Transactional
     @GetMapping("/{movieId}")
     public List<ReviewResponse> getReviewsByMovie(@PathVariable String movieId) {

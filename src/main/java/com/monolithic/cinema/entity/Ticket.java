@@ -17,11 +17,13 @@ public class Ticket {
     @GeneratedValue(strategy = GenerationType.UUID)
     String id;
 
-    @Column(name = "booking_id")
-    String userId;
+    @ManyToOne
+    @JoinColumn(name = "booking_id", nullable = false)
+     Booking booking;
 
-    @Column(name = "seat_id")
-    String seatId;
+    @OneToOne
+    @JoinColumn(name = "seat_id", nullable = false)
+     Seat seat;
 
 
 }

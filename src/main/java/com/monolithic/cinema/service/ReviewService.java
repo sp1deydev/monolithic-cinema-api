@@ -23,11 +23,10 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class ReviewService {
-
-    private final ReviewRepository reviewRepository;
-    private final ReviewMapper reviewMapper;
-    private final UserRepository userRepository;
-    private final MovieRepository movieRepository;
+    ReviewRepository reviewRepository;
+    ReviewMapper reviewMapper;
+    UserRepository userRepository;
+    MovieRepository movieRepository;
 
     public ReviewResponse createReview(ReviewRequest request) {
         User user = userRepository.findById(request.getUserId())
