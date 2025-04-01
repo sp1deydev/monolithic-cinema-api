@@ -12,13 +12,13 @@ import lombok.experimental.FieldDefaults;
 @Builder
 public class UserRequest {
 
-    @Size(min = 3, message = "USERNAME_INVALID")
+    @Size(min = 3, message = "INVALID_LENGTH_INPUT:Username")
     String username;
 
-    @Size(min = 3, message = "PASSWORD_INVALID")
+    @Size(min = 3, message = "INVALID_LENGTH_INPUT:Password")
     String password;
 
-    @Email(message = "Invalid email ")
+    @Email(message = "INVALID_FORMAT_INPUT:Email")
     String email;
 
     String roleName;

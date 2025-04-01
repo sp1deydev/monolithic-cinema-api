@@ -29,8 +29,10 @@ public class GlobalExceptionHandler {
     }
     @ExceptionHandler(value = MethodArgumentNotValidException.class)
     ResponseEntity<ErrorResponse> hanlingValidation(MethodArgumentNotValidException exception){
-        String enumKey = exception.getFieldError().getDefaultMessage();
-        ErrorCode errorCode = ErrorCode.INVALID_KEY;
+        String[] errorParts = Objects.requireNonNull(exception.getFieldError()).getDefaultMessage().split(":");
+        String enumKey = errorParts[0]; // Extract error code
+        String fieldName = errorParts.length > 1 ? errorParts[1] : "Field";
+        ErrorCode errorCode = ErrorCode.BAD_REQUEST;
         Map<String,Object> attributes = null;
         try {
             errorCode = ErrorCode.valueOf(enumKey);
@@ -48,8 +50,8 @@ public class GlobalExceptionHandler {
         errorResponse.setCode(errorCode.getCode());
         errorResponse.setMessage(
                 Objects.nonNull(attributes)
-                        ? mapAttribute(errorCode.getMessage(), attributes)
-                        : errorCode.getMessage());
+                        ? mapAttribute(errorCode.getMessage(), attributes).replace("{field}", fieldName)
+                        : errorCode.getMessage().replace("{field}", fieldName));
         return ResponseEntity.status(errorCode.getHttpStatus()).body(errorResponse);
 
     }

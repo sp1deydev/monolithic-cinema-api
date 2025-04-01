@@ -7,7 +7,7 @@ import org.springframework.http.HttpStatus;
 @Getter
 @AllArgsConstructor
 public enum ErrorCode {
-    BAD_REQUEST("E400", "Bad request", HttpStatus.BAD_REQUEST),
+    BAD_REQUEST("E400", "Uncategorized Bad request", HttpStatus.BAD_REQUEST),
     UNAUTHORIZED("E401", "Unauthorized", HttpStatus.UNAUTHORIZED),
     FORBIDDEN("E403", "Forbidden", HttpStatus.FORBIDDEN),
     RESOURCE_NOT_FOUND("E404", "%s not found", HttpStatus.NOT_FOUND),
@@ -15,9 +15,8 @@ public enum ErrorCode {
     INTERNAL_SERVER_ERROR("E500", "Internal server error", HttpStatus.INTERNAL_SERVER_ERROR),
     SERVICE_UNAVAILABLE("E503", "Service unavailable", HttpStatus.SERVICE_UNAVAILABLE),
     GATEWAY_TIMEOUT("E504", "Gateway timeout", HttpStatus.GATEWAY_TIMEOUT),
-    PASSWORD_INVALID("E400_INVALID_PASSWORD", "Password must be at least {min} characters", HttpStatus.BAD_REQUEST),
-    USERNAME_INVALID("E400_INVALID_USERNAME", "Username must be more than {min} character", HttpStatus.BAD_REQUEST),
-    INVALID_KEY("E400_INVALID_KEY", "Uncategorized error", HttpStatus.BAD_REQUEST),
+    INVALID_LENGTH_INPUT("E400_INVALID_LENGTH_INPUT", "{field} must be at least {min} characters", HttpStatus.BAD_REQUEST),
+    INVALID_FORMAT_INPUT("E400_INVALID_FORMAT_INPUT", "{field} format is not valid", HttpStatus.BAD_REQUEST),
     ;
 
     private final String code;
