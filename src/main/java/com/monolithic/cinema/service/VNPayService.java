@@ -32,6 +32,9 @@ public class VNPayService {
     PaymentRepository paymentRepository;
 
     public RequestPaymentResponse createOrder(int amount, String bookingId) throws UnsupportedEncodingException {
+        bookingRepository.findById(bookingId)
+                .orElseThrow(() -> new CustomException(ErrorCode.RESOURCE_NOT_FOUND, "Booking"));
+
         String vnp_Version = "2.1.0";
         String vnp_Command = "pay";
         String orderType = "other";

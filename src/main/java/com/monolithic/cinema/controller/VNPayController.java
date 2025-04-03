@@ -2,6 +2,7 @@ package com.monolithic.cinema.controller;
 
 import com.monolithic.cinema.dto.Response.RequestPaymentResponse;
 import com.monolithic.cinema.dto.Response.VNPayReturnOrderResponse;
+import com.monolithic.cinema.service.BookingService;
 import com.monolithic.cinema.service.VNPayService;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -19,9 +20,11 @@ import java.io.UnsupportedEncodingException;
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class VNPayController {
     VNPayService vnPayService;
+    BookingService bookingService;
 
     @GetMapping
     public RequestPaymentResponse createOrder(@RequestParam int amount, @RequestParam String bookingId) throws UnsupportedEncodingException {
+        bookingService.startPayment(bookingId);
         return vnPayService.createOrder(amount, bookingId);
     }
 
