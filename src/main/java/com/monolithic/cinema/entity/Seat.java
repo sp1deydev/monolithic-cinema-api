@@ -29,4 +29,7 @@ public class Seat {
     @ManyToOne
     @JoinColumn(name = "room_id", nullable = false)
     Room room;
+
+    @OneToMany(mappedBy = "seat", cascade = CascadeType.ALL)
+    List<Ticket> tickets;
 }

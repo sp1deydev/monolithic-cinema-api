@@ -14,14 +14,14 @@ import lombok.experimental.FieldDefaults;
 public class Payment {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
+//    @GeneratedValue(strategy = GenerationType.UUID)
     String id;
 
     @Column(name = "booking_id")
     String bookingId;
 
     @Column(name = "amount")
-    Double amount;
+    Integer amount;
 
     @Column(name = "status")
     String status;

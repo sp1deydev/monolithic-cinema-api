@@ -38,7 +38,7 @@ public class BookingController {
 
     @GetMapping
     public ResponseEntity<List<BookingResponse>> getBookingsByUserAndStatus(
-            @RequestParam String userId, @RequestParam String status) {
+            @RequestParam String userId, @RequestParam(required = false) String status) {
         return ResponseEntity.ok(bookingService.getBookingsByUserAndStatus(userId, status));
     }
 

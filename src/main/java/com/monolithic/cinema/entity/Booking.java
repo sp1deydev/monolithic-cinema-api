@@ -15,7 +15,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "bookings")
-public class Booking {
+public class Booking extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
